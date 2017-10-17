@@ -1,0 +1,22 @@
+﻿  main.cpp
+c:\users\rowan\source\repos\lab1project\lab1project\teapot.h(2980): warning C4838: conversion from 'double' to 'float' requires a narrowing conversion
+c:\users\rowan\source\repos\lab1project\lab1project\teapot.h(2980): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\rowan\source\repos\lab1project\lab1project\teapot.h(5959): warning C4838: conversion from 'double' to 'float' requires a narrowing conversion
+c:\users\rowan\source\repos\lab1project\lab1project\teapot.h(5959): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\rowan\source\repos\lab1project\lab1project\teapot.h(8938): warning C4838: conversion from 'double' to 'float' requires a narrowing conversion
+c:\users\rowan\source\repos\lab1project\lab1project\teapot.h(8938): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\rowan\source\repos\lab1project\lab1project\main.cpp(25): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+c:\users\rowan\source\repos\lab1project\lab1project\main.cpp(26): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+c:\users\rowan\source\repos\lab1project\lab1project\main.cpp(138): warning C4244: 'argument': conversion from 'float' to 'GLsizeiptr', possible loss of data
+c:\users\rowan\source\repos\lab1project\lab1project\main.cpp(142): warning C4244: 'argument': conversion from 'float' to 'GLsizeiptr', possible loss of data
+c:\users\rowan\source\repos\lab1project\lab1project\main.cpp(180): warning C4305: 'argument': truncation from 'double' to 'float'
+c:\users\rowan\source\repos\lab1project\lab1project\main.cpp(187): warning C4244: 'argument': conversion from 'float' to 'GLsizei', possible loss of data
+c:\users\rowan\source\repos\lab1project\lab1project\main.cpp(191): warning C4305: 'argument': truncation from 'double' to 'float'
+c:\users\rowan\source\repos\lab1project\lab1project\main.cpp(198): warning C4244: 'argument': conversion from 'float' to 'GLsizei', possible loss of data
+c:\users\rowan\source\repos\lab1project\lab1project\main.cpp(203): warning C4305: 'argument': truncation from 'double' to 'float'
+c:\users\rowan\source\repos\lab1project\lab1project\main.cpp(210): warning C4244: 'argument': conversion from 'float' to 'GLsizei', possible loss of data
+c:\users\rowan\source\repos\lab1project\lab1project\main.cpp(214): warning C4305: 'argument': truncation from 'double' to 'float'
+c:\users\rowan\source\repos\lab1project\lab1project\main.cpp(221): warning C4244: 'argument': conversion from 'float' to 'GLsizei', possible loss of data
+c:\users\rowan\source\repos\lab1project\lab1project\main.cpp(231): warning C4244: 'initializing': conversion from 'DWORD' to 'float', possible loss of data
+  Lab1Project.vcxproj -> C:\Users\Rowan\source\repos\Lab1Project\Debug\Lab1Project.exe
+  Lab1Project.vcxproj -> C:\Users\Rowan\source\repos\Lab1Project\Debug\Lab1Project.pdb (Partial PDB)
