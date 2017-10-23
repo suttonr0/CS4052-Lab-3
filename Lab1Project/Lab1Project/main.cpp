@@ -177,20 +177,35 @@ void display(){
 	//The model transform rotates the object by 45 degrees, the view transform sets the camera at -40 on the z-axis, and the perspective projection is setup using Antons method
 
 	// bottom-left
-	mat4 view = translate (identity_mat4 (), vec3 (0.0, 0.0, -40.0));
-	mat4 persp_proj = perspective(45.0, (float)width/(float)height, 0.1, 100.0);
-	// mat4 model = rotate_z_deg (identity_mat4 (), 45);  // added as global
+	mat4 view = translate(identity_mat4(), vec3(0.0, 0.0, -40.0));
+	mat4 persp_proj = perspective(45.0, (float)width / (float)height, 0.1, 100.0);
 
-	glViewport (0, 0, width/2 , height / 2);
-	glUniformMatrix4fv (proj_mat_location, 1, GL_FALSE, persp_proj.m);
-	glUniformMatrix4fv (view_mat_location, 1, GL_FALSE, view.m);
-	glUniformMatrix4fv (matrix_location, 1, GL_FALSE, model.m);
-	glDrawArrays (GL_TRIANGLES, 0, teapot_vertex_count);
+	glViewport(0, 0, width / 2, height / 2);
+	glUniformMatrix4fv(proj_mat_location, 1, GL_FALSE, persp_proj.m);
+	glUniformMatrix4fv(view_mat_location, 1, GL_FALSE, view.m);
+	glUniformMatrix4fv(matrix_location, 1, GL_FALSE, model.m);
+	glDrawArrays(GL_TRIANGLES, 0, teapot_vertex_count);
 
-	// bottom-right
-	view = translate(identity_mat4(), vec3(0.0, 0.0, -40.0));
-	persp_proj = perspective(45.0, (float)width / (float)height, 0.1, 100.0);
-	//model = rotate_z_deg(identity_mat4(), 90);
+
+	// bottom-right ORTHOGRAPHIC PROJECTION
+	view = translate(identity_mat4(), vec3(0.0, 0.0, -40.0));  // position to "left" of teapot
+	float orth_right = 40;
+	float orth_left = -40;
+	float orth_top = 40;
+	float orth_bottom = -40;
+	float orth_near = 0;
+	float orth_far = 80;
+
+	// MANUALLY INITIALISE ORTHOGRAPHIC MATRIX
+	// N.B. m[3] is equivalent to M[3][0], m[4] -> M[0][1], etc.
+	persp_proj = zero_mat4();
+	persp_proj.m[0] = 2/(orth_right - orth_left);
+	persp_proj.m[5] = 2/(orth_top - orth_bottom);
+	persp_proj.m[10] = -2/(orth_far - orth_near);
+	persp_proj.m[12] = -(orth_left + orth_right) / (orth_right - orth_left);
+	persp_proj.m[13] = -(orth_top + orth_bottom) / (orth_top - orth_bottom);
+	persp_proj.m[14] = -(orth_far + orth_near) / (orth_far - orth_near);
+	persp_proj.m[15] = 1;
 
 	glViewport(width/2, 0, width/2, height/2);
 	glUniformMatrix4fv(proj_mat_location, 1, GL_FALSE, persp_proj.m);
@@ -200,21 +215,21 @@ void display(){
 
 
 	// top-left
-	view = translate(identity_mat4(), vec3(0.0, 0.0, -50.0));
-	persp_proj = perspective(45.0, (float)width / (float)height, 0.1, 100.0);
-	//model = rotate_z_deg(identity_mat4(), 90);
+	view = translate(identity_mat4(), vec3(-40.0, 0.0, 0.0));  // position to "left" of teapot
+	view = rotate_y_deg(view, 270);  // rotate to face teapot
+	persp_proj = perspective(45.0, (float)width / (float)height, 0.1, 100.0); // Determines properties such as aspect and FOV
 
-	glViewport(0, height/2, width / 2, height / 2);
+	glViewport(0, height / 2, width / 2, height / 2);
 	glUniformMatrix4fv(proj_mat_location, 1, GL_FALSE, persp_proj.m);
 	glUniformMatrix4fv(view_mat_location, 1, GL_FALSE, view.m);
 	glUniformMatrix4fv(matrix_location, 1, GL_FALSE, model.m);
 	glDrawArrays(GL_TRIANGLES, 0, teapot_vertex_count);
-
+	
+	
+	
 	// top-right
 	view = translate(identity_mat4(), vec3(0.0, 0.0, -40.0));
 	persp_proj = perspective(45.0, (float)width / (float)height, 0.1, 100.0);
-	//model = rotate_z_deg(identity_mat4(), 90);
-	//model = translate(model, vec3(10, 0, 0));
 
 	glViewport(width / 2, height/2, width / 2, height / 2);
 	glUniformMatrix4fv(proj_mat_location, 1, GL_FALSE, persp_proj.m);
@@ -245,12 +260,22 @@ void processNormalKeys(unsigned char key, int mouse_x, int mouse_y) {
 		// Rotation about x,y,z axis
 	case 'q':
 		//printf("Letter Q %d, %d \n", mouse_x, mouse_y);
-		model = rotate_x_deg(model, 30);
-		printf("rotate 30\n");
+		model = translate(model, vec3(5,0,0));
+		printf("translate +5 in x direction\n");
 		break;
 	case 'a':
-		model = rotate_x_deg(model, -30);
-		printf("rotate -30\n");
+		model = translate(model, vec3(-5,0,0));
+		printf("translate -5 in x direction\n");
+		break;
+
+	case 'w':
+		//printf("Letter Q %d, %d \n", mouse_x, mouse_y);
+		model = translate(model, vec3(0, 0, 5));
+		printf("translate +5 in z direction\n");
+		break;
+	case 's':
+		model = translate(model, vec3(0, 0, -5));
+		printf("translate -5 in z direction\n");
 		break;
 	}
 	display(); //call display to update the screen after matrix transform
