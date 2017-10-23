@@ -176,7 +176,7 @@ void display(){
 	//Here is where the code for the viewport lab will go, to get you started I have drawn a t-pot in the bottom left
 	//The model transform rotates the object by 45 degrees, the view transform sets the camera at -40 on the z-axis, and the perspective projection is setup using Antons method
 
-	// bottom-left
+	// bottom-left PERSPECTIVE PROJECTION
 	mat4 view = translate(identity_mat4(), vec3(0.0, 0.0, -40.0));
 	mat4 persp_proj = perspective(45.0, (float)width / (float)height, 0.1, 100.0);
 
@@ -214,10 +214,11 @@ void display(){
 	glDrawArrays(GL_TRIANGLES, 0, teapot_vertex_count);
 
 
-	// top-left
-	view = translate(identity_mat4(), vec3(-40.0, 0.0, 0.0));  // position to "left" of teapot
-	view = rotate_y_deg(view, 270);  // rotate to face teapot
-	persp_proj = perspective(45.0, (float)width / (float)height, 0.1, 100.0); // Determines properties such as aspect and FOV
+	// top-left PERSPECTIVE PROJECTION (ASPECT TWICE AS WIDE, 150 distance)
+	// view = translate(identity_mat4(), vec3(-40.0, 0.0, 0.0));  // position to "left" of teapot
+	// view = rotate_y_deg(view, 270);  // rotate to face teapot	
+	view = translate(identity_mat4(), vec3(0.0, 0.0, -40.0)); 
+	persp_proj = perspective(45.0, (float)width*2 / (float)height, 0.1, 150.0); // Aspect twice as wide as bottom left, distance further as well
 
 	glViewport(0, height / 2, width / 2, height / 2);
 	glUniformMatrix4fv(proj_mat_location, 1, GL_FALSE, persp_proj.m);
