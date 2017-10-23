@@ -26,6 +26,7 @@ int width = 800.0;
 int height = 600.0;
 GLuint loc1;
 GLuint loc2;
+mat4 model = rotate_z_deg(identity_mat4(), 45);
 
 // Shader Functions- click on + to expand
 #pragma region SHADER_FUNCTIONS
@@ -178,7 +179,7 @@ void display(){
 	// bottom-left
 	mat4 view = translate (identity_mat4 (), vec3 (0.0, 0.0, -40.0));
 	mat4 persp_proj = perspective(45.0, (float)width/(float)height, 0.1, 100.0);
-	mat4 model = rotate_z_deg (identity_mat4 (), 45);
+	// mat4 model = rotate_z_deg (identity_mat4 (), 45);  // added as global
 
 	glViewport (0, 0, width/2 , height / 2);
 	glUniformMatrix4fv (proj_mat_location, 1, GL_FALSE, persp_proj.m);
@@ -189,7 +190,7 @@ void display(){
 	// bottom-right
 	view = translate(identity_mat4(), vec3(0.0, 0.0, -40.0));
 	persp_proj = perspective(45.0, (float)width / (float)height, 0.1, 100.0);
-	model = rotate_z_deg(identity_mat4(), 90);
+	//model = rotate_z_deg(identity_mat4(), 90);
 
 	glViewport(width/2, 0, width/2, height/2);
 	glUniformMatrix4fv(proj_mat_location, 1, GL_FALSE, persp_proj.m);
@@ -201,7 +202,7 @@ void display(){
 	// top-left
 	view = translate(identity_mat4(), vec3(0.0, 0.0, -50.0));
 	persp_proj = perspective(45.0, (float)width / (float)height, 0.1, 100.0);
-	model = rotate_z_deg(identity_mat4(), 90);
+	//model = rotate_z_deg(identity_mat4(), 90);
 
 	glViewport(0, height/2, width / 2, height / 2);
 	glUniformMatrix4fv(proj_mat_location, 1, GL_FALSE, persp_proj.m);
@@ -210,9 +211,10 @@ void display(){
 	glDrawArrays(GL_TRIANGLES, 0, teapot_vertex_count);
 
 	// top-right
-	view = translate(identity_mat4(), vec3(0.0, 0.0, -60.0));
+	view = translate(identity_mat4(), vec3(0.0, 0.0, -40.0));
 	persp_proj = perspective(45.0, (float)width / (float)height, 0.1, 100.0);
-	model = rotate_z_deg(identity_mat4(), 90);
+	//model = rotate_z_deg(identity_mat4(), 90);
+	//model = translate(model, vec3(10, 0, 0));
 
 	glViewport(width / 2, height/2, width / 2, height / 2);
 	glUniformMatrix4fv(proj_mat_location, 1, GL_FALSE, persp_proj.m);
@@ -238,6 +240,21 @@ void updateScene() {
 	glutPostRedisplay();
 }
 
+void processNormalKeys(unsigned char key, int mouse_x, int mouse_y) {
+	switch (key) {
+		// Rotation about x,y,z axis
+	case 'q':
+		//printf("Letter Q %d, %d \n", mouse_x, mouse_y);
+		model = rotate_x_deg(model, 30);
+		printf("rotate 30\n");
+		break;
+	case 'a':
+		model = rotate_x_deg(model, -30);
+		printf("rotate -30\n");
+		break;
+	}
+	display(); //call display to update the screen after matrix transform
+}
 
 void init()
 {
@@ -278,6 +295,8 @@ int main(int argc, char** argv){
     }
 	// Set up your objects and shaders
 	init();
+	//Set keyboard input
+	glutKeyboardFunc(processNormalKeys);
 	// Begin infinite event loop
 	glutMainLoop();
     return 0;
