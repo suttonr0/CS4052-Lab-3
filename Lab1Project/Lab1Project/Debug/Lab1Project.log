@@ -17,5 +17,6 @@ c:\users\rowan\source\repos\lab1project\lab1project\main.cpp(227): warning C4244
 c:\users\rowan\source\repos\lab1project\lab1project\main.cpp(233): warning C4305: 'argument': truncation from 'double' to 'float'
 c:\users\rowan\source\repos\lab1project\lab1project\main.cpp(239): warning C4244: 'argument': conversion from 'float' to 'GLsizei', possible loss of data
 c:\users\rowan\source\repos\lab1project\lab1project\main.cpp(249): warning C4244: 'initializing': conversion from 'DWORD' to 'float', possible loss of data
+c:\users\rowan\source\repos\lab1project\lab1project\main.cpp(257): warning C4305: 'argument': truncation from 'double' to 'float'
   Lab1Project.vcxproj -> C:\Users\Rowan\source\repos\Lab1Project\Debug\Lab1Project.exe
   Lab1Project.vcxproj -> C:\Users\Rowan\source\repos\Lab1Project\Debug\Lab1Project.pdb (Partial PDB)

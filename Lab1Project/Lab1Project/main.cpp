@@ -218,7 +218,7 @@ void display(){
 	// view = translate(identity_mat4(), vec3(-40.0, 0.0, 0.0));  // position to "left" of teapot
 	// view = rotate_y_deg(view, 270);  // rotate to face teapot	
 	view = translate(identity_mat4(), vec3(0.0, 0.0, -40.0)); 
-	persp_proj = perspective(45.0, (float)width*2 / (float)height, 0.1, 150.0); // Aspect twice as wide as bottom left, distance further as well
+	persp_proj = perspective(45.0, (float)width * 2 / (float)height, 0.1, 150.0); // Aspect twice as wide as bottom left, distance further as well
 
 	glViewport(0, height / 2, width / 2, height / 2);
 	glUniformMatrix4fv(proj_mat_location, 1, GL_FALSE, persp_proj.m);
@@ -226,10 +226,10 @@ void display(){
 	glUniformMatrix4fv(matrix_location, 1, GL_FALSE, model.m);
 	glDrawArrays(GL_TRIANGLES, 0, teapot_vertex_count);
 	
-	
-	
-	// top-right
-	view = translate(identity_mat4(), vec3(0.0, 0.0, -40.0));
+
+
+	// top-right LOOK AT
+	view = look_at(vec3(-40.0, 0.0, 0.0), vec3(0.0, 0.0, 0.0), vec3(0, -1.0, 0.0));
 	persp_proj = perspective(45.0, (float)width / (float)height, 0.1, 100.0);
 
 	glViewport(width / 2, height/2, width / 2, height / 2);
